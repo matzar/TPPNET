@@ -32,8 +32,15 @@ void AMovingPlatform::Tick(float DeltaTime)
 
 	if (HasAuthority())
 	{
+		// Save Actor's location (in global coordinates) in the vector
 		FVector Location = GetActorLocation();
-		Location += FVector(Speed * DeltaTime, 0, 0);
+		// Transform Target Location gizmo from local space coordinates to global coordinates
+		FVector GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
+		// Work out the direction vector based on the Actor's position and TragetLocation's (in global coordinates) position
+		FVector Direction = (GlobalTargetLocation - Location).GetSafeNormal();
+		// Add the Direction vector to the Actor's location vector
+		Location += Speed * DeltaTime * Direction;
+		// Update Actor's location with the new Location vector
 		SetActorLocation(Location);
 	}
 }
