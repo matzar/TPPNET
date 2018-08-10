@@ -24,6 +24,10 @@ void AMovingPlatform::BeginPlay()
 		SetReplicates(true);
 		SetReplicateMovement(true);
 	}
+
+	GlobalStartLocation = GetTargetLocation();
+	// Transform Target Location gizmo from local space coordinates to global coordinates
+	GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
 }
 
 void AMovingPlatform::Tick(float DeltaTime)
@@ -34,10 +38,19 @@ void AMovingPlatform::Tick(float DeltaTime)
 	{
 		// Save Actor's location (in global coordinates) in the vector
 		FVector Location = GetActorLocation();
-		// Transform Target Location gizmo from local space coordinates to global coordinates
-		FVector GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
+
+		float JourneyLength = (GlobalStartLocation - GlobalTargetLocation).Size();
+		float JourneyTraveled = (GlobalStartLocation - Location).Size();
+
+		if (JourneyTraveled > JourneyLength)
+		{
+			FVector Temp = GlobalTargetLocation;
+			GlobalTargetLocation = GlobalStartLocation;
+			GlobalStartLocation = Temp;
+		}
+
 		// Work out the direction vector based on the Actor's position and TragetLocation's (in global coordinates) position
-		FVector Direction = (GlobalTargetLocation - Location).GetSafeNormal();
+		FVector Direction = (GlobalTargetLocation - GlobalStartLocation).GetSafeNormal();
 		// Add the Direction vector to the Actor's location vector
 		Location += Speed * DeltaTime * Direction;
 		// Update Actor's location with the new Location vector
