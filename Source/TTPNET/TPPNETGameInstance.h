@@ -7,14 +7,16 @@
 #include "TPPNETGameInstance.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class TTPNET_API UTPPNETGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
-	
-	
-	
-	
+
+public:
+	UTPPNETGameInstance(const FObjectInitializer& ObjectIn);
+
+	virtual void Init();
+
 };

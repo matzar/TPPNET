@@ -41,7 +41,7 @@ void APlatformTrigger::Tick(float DeltaTime)
 void APlatformTrigger::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Activated"));
+	//UE_LOG(LogTemp, Warning, TEXT("Activated"));
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
 
 	for (AMovingPlatform* Platform : PlatformToTrigger)
@@ -53,7 +53,7 @@ void APlatformTrigger::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActo
 void APlatformTrigger::OnOverlapEnd(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Deactivated"));
+	//UE_LOG(LogTemp, Warning, TEXT("Deactivated"));
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap End"));
 
 	for (AMovingPlatform* Platform : PlatformToTrigger)
