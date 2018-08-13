@@ -4,6 +4,8 @@
 
 #include "Components/BoxComponent.h"
 
+#include "Engine/Engine.h"
+
 
 // Sets default values
 APlatformTrigger::APlatformTrigger()
@@ -18,7 +20,8 @@ APlatformTrigger::APlatformTrigger()
 		RootComponent = TriggerVolume;
 	}
 
-
+	TriggerVolume->OnComponentBeginOverlap.AddDynamic(this, &APlatformTrigger::OnOverlapBegin);
+	TriggerVolume->OnComponentEndOverlap.AddDynamic(this, &APlatformTrigger::OnOverlapEnd);
 }
 
 // Called when the game starts or when spawned
@@ -26,8 +29,7 @@ void APlatformTrigger::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TriggerVolume->OnComponentBeginOverlap.AddDynamic(this, &APlatformTrigger::OnOverlapBegin);
-	TriggerVolume->OnComponentEndOverlap.AddDynamic(this, &APlatformTrigger::OnOverlapEnd);
+
 }
 
 // Called every frame
@@ -40,12 +42,16 @@ void APlatformTrigger::Tick(float DeltaTime)
 void APlatformTrigger::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Activated"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
+
+	//UE_LOG(LogTemp, Warning, TEXT("Activated"));
 }
 
 void APlatformTrigger::OnOverlapEnd(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Deactivated"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap End"));
+
+	//UE_LOG(LogTemp, Warning, TEXT("Deactivated"));
 }
 
