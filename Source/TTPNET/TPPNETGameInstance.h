@@ -20,6 +20,9 @@ public:
 	virtual void Init();
 
 	UFUNCTION(Exec)
+	void LoadMenu();
+
+	UFUNCTION(Exec)
 	void Host();
 
 	UFUNCTION(Exec)
