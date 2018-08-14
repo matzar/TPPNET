@@ -27,5 +27,5 @@ public:
 
 private:
 	// class UUserWidget - that is a forward declaration
-	TSubclassOf<class UUserWidget> MenuClass;
+	TSubclassOf<UUserWidget> MenuClass;
 };

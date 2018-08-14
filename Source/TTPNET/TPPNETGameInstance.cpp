@@ -5,6 +5,7 @@
 #include "Engine/Engine.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Blueprint/UserWidget.h"
+
 #include "PlatformTrigger.h"
 
 UTPPNETGameInstance::UTPPNETGameInstance(const FObjectInitializer& ObjectIn)
@@ -18,7 +19,7 @@ UTPPNETGameInstance::UTPPNETGameInstance(const FObjectInitializer& ObjectIn)
 void UTPPNETGameInstance::Init()
 {
 	UE_LOG(LogTemp, Warning, TEXT("GameInstance Init"));
-	UE_LOG(LogTemp, Warning, TEXT("Found class %s", *MenuClass.Class->GetName()));
+	UE_LOG(LogTemp, Warning, TEXT("Found class %s"), *MenuClass.Class->GetName());
 }
 
 void UTPPNETGameInstance::Host()
