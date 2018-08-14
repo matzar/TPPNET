@@ -10,16 +10,15 @@
 
 UTPPNETGameInstance::UTPPNETGameInstance(const FObjectInitializer& ObjectIn)
 {
-	static ConstructorHelpers::FClassFinder<UUserWidget> MenuBPClass(TEXT("/Game/MenuSystem/WBP_MainMenu"));
+	ConstructorHelpers::FClassFinder<UUserWidget> MenuBPClass(TEXT("/Game/MenuSystem/WBP_MainMenu"));
 	if (!ensure(MenuBPClass.Class != nullptr)) return;
-
 	MenuClass = MenuBPClass.Class;
 }
 
 void UTPPNETGameInstance::Init()
 {
 	UE_LOG(LogTemp, Warning, TEXT("GameInstance Init"));
-	UE_LOG(LogTemp, Warning, TEXT("Found class %s"), *MenuClass.Class->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("Found class %s"), *MenuClass->GetName());
 }
 
 void UTPPNETGameInstance::Host()
