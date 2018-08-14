@@ -4,17 +4,21 @@
 
 #include "Engine/Engine.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Blueprint/UserWidget.h"
+#include "PlatformTrigger.h"
 
 UTPPNETGameInstance::UTPPNETGameInstance(const FObjectInitializer& ObjectIn)
 {
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPersonCPP/Blueprints/ThirdPersonCharacter"));
+	static ConstructorHelpers::FClassFinder<UUserWidget> MenuBPClass(TEXT("/Game/MenuSystem/WBP_MainMenu"));
+	if (!ensure(MenuBPClass.Class != nullptr)) return;
 
-	UE_LOG(LogTemp, Warning, TEXT("GameInstance Constructor"));
+	MenuClass = MenuBPClass.Class;
 }
 
 void UTPPNETGameInstance::Init()
 {
 	UE_LOG(LogTemp, Warning, TEXT("GameInstance Init"));
+	UE_LOG(LogTemp, Warning, TEXT("Found class %s", *MenuClass.Class->GetName()));
 }
 
 void UTPPNETGameInstance::Host()

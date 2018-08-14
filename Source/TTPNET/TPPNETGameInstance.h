@@ -24,4 +24,8 @@ public:
 
 	UFUNCTION(Exec)
 	void Join(const FString& Address);
+
+private:
+	// class UUserWidget - that is a forward declaration
+	TSubclassOf<class UUserWidget> MenuClass;
 };
