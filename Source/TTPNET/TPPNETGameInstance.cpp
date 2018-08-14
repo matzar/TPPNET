@@ -3,9 +3,12 @@
 #include "TPPNETGameInstance.h"
 
 #include "Engine/Engine.h"
+#include "UObject/ConstructorHelpers.h"
 
 UTPPNETGameInstance::UTPPNETGameInstance(const FObjectInitializer& ObjectIn)
 {
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPersonCPP/Blueprints/ThirdPersonCharacter"));
+
 	UE_LOG(LogTemp, Warning, TEXT("GameInstance Constructor"));
 }
 
