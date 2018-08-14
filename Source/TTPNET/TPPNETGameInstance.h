@@ -19,7 +19,7 @@ public:
 
 	virtual void Init();
 
-	UFUNCTION(Exec)
+	UFUNCTION(BlueprintCallable)
 	void LoadMenu();
 
 	UFUNCTION(Exec)
